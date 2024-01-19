@@ -1,0 +1,29 @@
+// Limpar o canvas antes de desenhar
+contexto.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+contexto.strokeStyle = "#000"; // Cor da borda
+//contexto.arc(posiçãoX, posiçãoY, largura, arco da circunferência)
+
+contexto.strokeStyle = "#000";
+//contexto.arc(posiçãoX, posiçãoY, largura, arco da circunferência)
+
+contexto.arc(novaPosiçãoX, novaPosiçãoY, raioCabeca, 0, 2 * Math.PI); // Desenha um círculo
+
+contexto.fill(); // preecha com a cor definida pelo fillStyle ou qualquer outra coisa
+contexto.stroke(); // Mostra este desenho
+
+contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca); 
+//move o ponto atual do caminho para as coordenadas (x, y) sem desenhar nada.
+    
+contexto.lineTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + alturaCorpo); 
+// adiciona uma linha no ponto atual até as coordenadas x e y levadas polo moveTo()
+
+
+==================================================================
+Lógica de programação
+
+1) Quando eu clicar no botão
+    varrer a palavra inteira (arrayWord) ou concatenada (wordSelected);
+2) Se eu encontrar mais de uma ocorrência da letra na palavra
+    eu devo preencher com a botão clicado e atualizar a palavra
+    mostrando a letra selecionada

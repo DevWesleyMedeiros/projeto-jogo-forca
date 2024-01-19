@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+}
+body, html{
+    height: 100%;
+}
+.containers-button{
+    width: 500px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 0.5rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.containers-button > .input{
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+}
+.containers-button > .input > input{
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+    cursor: text;
+}
+.containers-button > button{
+    width: 100px;
+    height: 30px;
+    padding: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+div.containers-button > div.resultado{
+    margin-top: 1rem;
+    width: 100%;
+    height: 50px;
+    text-align: left;
+    padding: 0.5rem;
+    border: 1px solid black;
+}
