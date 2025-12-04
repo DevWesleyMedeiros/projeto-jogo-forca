@@ -43,8 +43,8 @@ python -m http.server 8000
 3. Abra no navegador: `http://localhost:8000/index.html`.
 
 Observação: é necessário servir por HTTP por conta de módulos ES6 (import/export).
-**Como rodar (Desenvolvimento e Build)**
 
+**Como rodar (Desenvolvimento e Build)**
 Recomendo ter instalados: `Node.js` (v16+), `npm` e `Python 3`.
 
 1) Instalar dependências (uma vez):

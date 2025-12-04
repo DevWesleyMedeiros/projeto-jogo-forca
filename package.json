@@ -36,5 +36,8 @@
     "cpx": "^1.5.0",
     "esbuild": "^0.27.0",
     "rimraf": "^6.1.2"
+  },
+  "dependencies": {
+    "vercel": "^48.12.1"
   }
 }
