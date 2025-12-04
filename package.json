@@ -1,0 +1,40 @@
+{
+  "name": "projeto-jogo-forca",
+  "version": "1.0.0",
+  "description": "Um jogo da forca básico\r Projeto educativo: Jogo da Forca em HTML, CSS, Canvas e JavaScript puro",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:js": "esbuild ./assets-scripts/box-letters-game.js --bundle --sourcemap --outfile=dist/assets-scripts/main.js --format=esm",
+    "copy:static": "cpx \"index.html\" dist && cpx \"style/**\" dist/style && cpx \"assests/**\" dist/assests && cpx \"README.md\" dist",
+    "build:html": "node build-html.js",
+    "build": "npm run clean && npm run build:js && npm run copy:static && npm run build:html",
+    "dev": "npm run build:js -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevWesleyMedeiros/projeto-jogo-forca.git"
+  },
+  "keywords": [
+    "jogo-da-forca",
+    "forca",
+    "hangman",
+    "javascript",
+    "html",
+    "css",
+    "canvas",
+    "game"
+  ],
+  "author": "Wesley Medeiros",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/DevWesleyMedeiros/projeto-jogo-forca/issues"
+  },
+  "homepage": "https://github.com/DevWesleyMedeiros/projeto-jogo-forca#readme",
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "esbuild": "^0.27.0",
+    "rimraf": "^6.1.2"
+  }
+}

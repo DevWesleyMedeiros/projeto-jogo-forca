@@ -1,82 +1,148 @@
+// esse arquivo contém funções para desenhar o boneco da forca em um canvas HTML5
+
 const myCanvas = document.getElementById("mycanvas");
-var contexto = myCanvas.getContext("2d");
+if (!myCanvas) {
+  // canvas não existe no DOM atual
+  console.warn("Canvas #mycanvas não encontrado. Desabilitando desenhos.");
+}
 
-contexto.clearRect(0, 0, myCanvas.width, myCanvas.height);
+var contexto = myCanvas ? myCanvas.getContext("2d") : null;
 
+// variáveis dependentes do tamanho do canvas
 var raioCabeca = 20;
 var alturaCorpo = 60;
+var novaPosiçãoX = 0;
+var novaPosiçãoY = 0;
 
-var novaPosiçãoX = 870;
-var novaPosiçãoY = 200;
+function computePositions() {
 
-function drawBackGround(){
-    contexto.fillStyle = "#f7f2f2";
-    contexto.strokeStyle = "#d8e7eb";
-    contexto.lineWidth = 0.3;
-    for (let h = 0; h < 980; h += 40) {
-        contexto.strokeRect(h, 0, 40, 480);
-    }
-    for (let v = 0; v < 480; v += 40) {
-        contexto.strokeRect(0, v, 1000, 40);
-    }
+  if (!myCanvas) return;
+  // recalcula posições e tamanhos baseados nas dimensões atuais do canvas
+
+  const w = myCanvas.width;
+  const h = myCanvas.height;
+  novaPosiçãoX = Math.round(w * 0.87);
+  novaPosiçãoY = Math.round(h * 0.42);
+  raioCabeca = Math.max(10, Math.round(Math.min(w, h) * 0.03));
+  alturaCorpo = Math.max(30, Math.round(h * 0.12));
 }
 
-contexto.strokeStyle = "#000";
-
-function drawHead(){
-    contexto.beginPath();
-    contexto.arc(novaPosiçãoX, novaPosiçãoY, raioCabeca, 0, 2 * Math.PI);
-    contexto.fillStyle = "#47331a";
-    contexto.fill();
-    contexto.stroke();
+function drawBackGround() {
+  if (!contexto) return;
+  contexto.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  contexto.fillStyle = "#f7f2f2";
+  contexto.strokeStyle = "#d8e7eb";
+  contexto.lineWidth = 0.3;
+  const w = myCanvas.width;
+  const h = myCanvas.height;
+  for (let hpos = 0; hpos < w; hpos += 40) {
+    contexto.strokeRect(hpos, 0, 40, h);
+  }
+  for (let v = 0; v < h; v += 40) {
+    contexto.strokeRect(0, v, w, 40);
+  }
 }
 
-function drawBody(){
-    contexto.beginPath();
-    contexto.lineWidth = 5;
-    contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca); 
-    contexto.lineTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + alturaCorpo); 
-    contexto.strokeStyle = "#47331a";
-    contexto.fill();
-    contexto.stroke();
+if (contexto) contexto.strokeStyle = "#000";
+
+function drawHead() {
+  if (!contexto) return;
+  contexto.beginPath();
+  contexto.arc(novaPosiçãoX, novaPosiçãoY, raioCabeca, 0, 2 * Math.PI);
+  contexto.fillStyle = "#47331a";
+  contexto.fill();
+  contexto.stroke();
 }
 
-function drawArms(){
-    var comprimentoBracos = 25;
-    contexto.beginPath();
-    contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + 30);
-    contexto.lineTo(novaPosiçãoX - comprimentoBracos, novaPosiçãoY + raioCabeca + 60);
-    contexto.stroke();
-
-    contexto.beginPath();
-    contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + 30);
-    contexto.lineTo(novaPosiçãoX + comprimentoBracos, novaPosiçãoY + raioCabeca + 60);
-    contexto.stroke();
+function drawBody() {
+  if (!contexto) return;
+  contexto.beginPath();
+  contexto.lineWidth = 5;
+  contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca);
+  contexto.lineTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + alturaCorpo);
+  contexto.strokeStyle = "#47331a";
+  contexto.stroke();
 }
 
-function drawLegs(){
-    var comprimentoPernas = 25;
-    contexto.beginPath();
-    contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + alturaCorpo);
-    contexto.lineTo(novaPosiçãoX - comprimentoPernas, novaPosiçãoY + raioCabeca + alturaCorpo + 80);
-    contexto.stroke();
+function drawArms() {
+  if (!contexto) return;
+  var comprimentoBracos = Math.max(20, Math.round(myCanvas.width * 0.025));
+  contexto.beginPath();
+  contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + 30);
+  contexto.lineTo(
+    novaPosiçãoX - comprimentoBracos,
+    novaPosiçãoY + raioCabeca + 60
+  );
+  contexto.stroke();
 
-    contexto.beginPath();
-    contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + alturaCorpo);
-    contexto.lineTo(novaPosiçãoX + comprimentoPernas, novaPosiçãoY + raioCabeca + alturaCorpo + 80);
-    contexto.stroke();
+  contexto.beginPath();
+  contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + 30);
+  contexto.lineTo(
+    novaPosiçãoX + comprimentoBracos,
+    novaPosiçãoY + raioCabeca + 60
+  );
+  contexto.stroke();
 }
 
-function drawLineHang(){
-    contexto.beginPath();
-    contexto.lineWidth = 5;
-    contexto.strokeStyle = "#b57238";
-    contexto.fill();
-    contexto.moveTo(900, 223);
-    contexto.lineTo(830, 222);
-    contexto.stroke();
+function drawLegs() {
+  if (!contexto) return;
+  var comprimentoPernas = Math.max(20, Math.round(myCanvas.width * 0.025));
+  contexto.beginPath();
+  contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + alturaCorpo);
+  contexto.lineTo(
+    novaPosiçãoX - comprimentoPernas,
+    novaPosiçãoY + raioCabeca + alturaCorpo + 80
+  );
+  contexto.stroke();
+
+  contexto.beginPath();
+  contexto.moveTo(novaPosiçãoX, novaPosiçãoY + raioCabeca + alturaCorpo);
+  contexto.lineTo(
+    novaPosiçãoX + comprimentoPernas,
+    novaPosiçãoY + raioCabeca + alturaCorpo + 80
+  );
+  contexto.stroke();
 }
 
-drawBackGround();
+function drawLineHang() {
+  if (!contexto) return;
+  contexto.beginPath();
+  contexto.lineWidth = 5;
+  contexto.strokeStyle = "#b57238";
+  contexto.moveTo(
+    Math.round(myCanvas.width * 0.9),
+    Math.round(myCanvas.height * 0.46)
+  );
+  contexto.lineTo(
+    Math.round(myCanvas.width * 0.83),
+    Math.round(myCanvas.height * 0.458)
+  );
+  contexto.stroke();
+}
+
+// recalcula posições quando a janela muda de tamanho e redesenha background
+function handleResize() {
+
+  if (!myCanvas) return;
+  // manter tamanho alinhado ao CSS se estiver usando largura responsiva
+
+  const style = getComputedStyle(myCanvas);
+  // tenta ajustar atributos do canvas para corresponder ao tamanho renderizado
+
+  const cssWidth = parseInt(style.width, 10);
+  const cssHeight = parseInt(style.height, 10);
+  if (!isNaN(cssWidth) && !isNaN(cssHeight)) {
+    myCanvas.width = cssWidth;
+    myCanvas.height = cssHeight;
+  }
+  computePositions();
+  drawBackGround();
+}
+
+if (myCanvas) {
+  computePositions();
+  drawBackGround();
+  window.addEventListener("resize", handleResize);
+}
 
 export { drawBackGround, drawHead, drawBody, drawArms, drawLegs, drawLineHang }
